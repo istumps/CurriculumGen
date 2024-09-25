@@ -10,6 +10,11 @@ import SelectOption from './_components/SelectOption';
 import { UserInputContext } from '@/app/_context/UserInputContext';
 import { GenerateCourseLayout_AI } from '@/configs/AiModel';
 import LoadingDialog from './_components/LoadingDialog';
+import { CourseList } from '../../configs/schema';
+import { db } from '../../configs/db';
+import uuid4 from "uuid4";
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 function CreateCourse() {
 
@@ -37,7 +42,8 @@ function CreateCourse() {
 const [activeIndex, setActiveIndex] =useState(0)
 const {userCourseInput, setUserCourseInput}=useContext(UserInputContext)
 const [loading, setLoading]=useState(false)
-
+const {user}=useUser()
+const router = useRouter()
 /*useEffect(()=>{
     console.log(userCourseInput)
 },[userCourseInput])
@@ -75,19 +81,36 @@ const GenerateCourseLayout= async()=>{
     ', in JSON format';
 
     const FINAL_PROMPT = process.env.NEXT_PUBLIC_BASIC_PROMPT+USER_INPUT_PROMPT;
-    console.log(FINAL_PROMPT)
+    //console.log(FINAL_PROMPT)
 
     const result = await GenerateCourseLayout_AI.sendMessage(FINAL_PROMPT);
     console.log(result.response?.text());
     console.log(JSON.parse(result.response?.text()))
     setLoading(false)
+    SaveCourseLayoutInDb(JSON.parse(result.response?.text()))
     
-
-    
-    
-
 }
 
+const SaveCourseLayoutInDb=async(courseLayout)=>{
+    var id = uuid4(); //courseId
+    setLoading(true)
+
+    const result = await db.insert(CourseList).values({
+        courseId:id,
+        name:userCourseInput?.topic,
+        level:userCourseInput?.level,
+        category:userCourseInput?.category,
+        courseOutput:courseLayout,
+        createdBy:user?.primaryEmailAddress?.emailAddress,
+        userName:user?.fullName,
+        userProfileImage:user?.imageUrl
+
+    })
+    //console.log("FINISHED",result)
+    setLoading(false)
+    router.replace('/create-course/'+id)
+
+}
 
   return (
     <div>
