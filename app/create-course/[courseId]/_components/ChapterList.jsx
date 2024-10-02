@@ -2,7 +2,7 @@ import React from 'react'
 import { CiClock2 } from "react-icons/ci";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import EditChapters from './EditChapters';
-function ChapterList({ course,refreshData }) {
+function ChapterList({ course,refreshData, edit = true }) {
   return (
     <div className="space-y-4">
       {course?.courseOutput?.chapters?.map((chapter, index) => (
@@ -18,7 +18,7 @@ function ChapterList({ course,refreshData }) {
                 {`Chapter ${index + 1}: ${chapter?.chapterName}`}
               </h2>
               <div className="ml-2 text-2xl whitespace-nowrap">
-                <EditChapters index={index} course={course} refreshData={refreshData} />
+                {edit&&<EditChapters index={index} course={course} refreshData={refreshData} />}
               </div>
             </div>
 

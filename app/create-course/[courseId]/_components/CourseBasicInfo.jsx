@@ -9,11 +9,13 @@ import EditCourseBasicInfo from './EditCourseBasicInfo';
 import { db } from '@/configs/db';
 import { CourseList } from '@/configs/schema';
 import { eq } from 'drizzle-orm';
-
+import Link from 'next/link';
 
 function CourseBasicInfo({
     course,
-    refreshData}) {
+    refreshData,
+    edit=true    
+}) {
 
         /**
          * Select file and upload to firebase storage
@@ -49,17 +51,19 @@ function CourseBasicInfo({
         <div className='grid gird-cols-1 md:grid-cols-2 gap-5'>
             <div>
                 
-                <h2 className='font-bold text-2xl flex'>{course?.courseOutput?.name} <EditCourseBasicInfo course={course} refreshData={()=>refreshData(true)}/> </h2>
+                <h2 className='font-bold text-2xl flex'>{course?.courseOutput?.name} {edit && <EditCourseBasicInfo course={course} refreshData={()=>refreshData(true)}/>} </h2>
                 <p className='text-gray-400 mt-3 text-sm'>{course?.courseOutput?.description}</p>
                 <h2 className='font-medium mt-2 flex gap-2 items-center text-primary'> <BiCategory /> {course?.category}</h2>
+                {!edit&&<Link href={'/course/'+course?.courseId+'/start'}>
                 <Button className="w-full mt-5">Start</Button>
+                </Link>}
             </div>
             <div>
                 <label htmlFor='upload-img' className='cursor-pointer'>
                 <Image src={ selectedFile?selectedFile:'/placeholder.png'}  width={300} height={300} 
                     className='w-full max-w-[600px] h-full  max-h-[375px] object-fit rounded-xl'/> 
                     </label>
-                <input type='file' id='upload-img' className=' opacity-0' onChange={onFileSelected} />
+                {edit&&<input type='file' id='upload-img' className=' opacity-0' onChange={onFileSelected} />}
             </div>
         </div>
        

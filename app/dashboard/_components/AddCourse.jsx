@@ -19,7 +19,7 @@ function AddCourse() {
         </h2>
         <p className='text-gray-500 text-sm'>Create new course with AI, Share with Friends, </p>
         </div>
-        <Link href={userCourseList>=5?'dashboard/upgrade':'/create-course'}> <Button>+ Create AI course</Button></Link>
+        <Link prefetch={true} href={userCourseList>=5?'dashboard/upgrade':'/create-course'}> <Button>+ Create AI course</Button></Link>
        
        
 

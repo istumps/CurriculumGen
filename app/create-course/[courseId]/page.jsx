@@ -42,7 +42,7 @@ function CourseLayout({params}) {
             eq(CourseList?.createdBy, user?.primaryEmailAddress?.emailAddress)))
         
         setCourse(result[0])    
-        console.log(result)
+        //console.log(result)
     }
 
     const GenerateChapterContent= ()=>{
