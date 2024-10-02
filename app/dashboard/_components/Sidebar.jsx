@@ -1,15 +1,17 @@
 'use client'
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AiOutlineHome,  AiOutlineCompass, AiOutlineRocket, AiOutlineLogout } from "react-icons/ai";
 import { usePathname } from 'next/navigation';
 import {Progress} from '@/components/ui/progress'
+import {UserCourseListContext} from '@/app/_context/UserCourseListContext'
+
 function Sidebar() {
 
 
   const path = usePathname()
-
+  const {userCourseList, setUserCourseList} = useContext(UserCourseListContext)
   const Menu =[
     {
       id:1,
@@ -59,8 +61,8 @@ function Sidebar() {
           ))}
         </ul>
         <div className='absolute bottom-10 w-[80%]'>
-          <Progress className='mt-5' value={33} />
-          <h2 className='text-sm my-2'>3 out of 5 Course created</h2>
+          <Progress className='mt-5' value={(userCourseList?.length/5) *100} />
+          <h2 className='text-sm my-2'>{userCourseList?.length} out of 5 Course created</h2>
           <h2 className='text-xs text-gray-500 '>Upgrade your plan for unlimited courses</h2>
 
         </div>
