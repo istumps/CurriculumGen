@@ -5,8 +5,8 @@
 ## Screenshots
 
 <img width="400" alt="Screen Shot 2023-08-06 at 3 29 06 AM" src="https://github.com/user-attachments/assets/ebc912ae-de6a-4417-856d-4bb55e0785f6">
+<img width="400" alt="Screen Shot 2023-08-06 at 3 29 06 AM" src="https://github.com/user-attachments/assets/73e75c37-9259-4d94-ad40-7d7ecd6fdd40">
 
-<img width="400" alt="Screen Shot 2023-08-06 at 3 29 06 AM" src="https://github.com/user-attachments/assets/547dee80-c7dd-43b4-9cd9-bf88764f4d02">
 
 
 
@@ -27,6 +27,8 @@ To start creating your own AI-generated courses on **Instructify**, follow these
 - **Customizable Content**: Adjust chapters, content, and examples to suit your teaching style or the learning needs of your audience.
 - **Progress Tracking**: Monitor your learning and development over time.
 - **Video Integration**: Optionally include auto-generated video content in your course
+
+<img width="400" alt="Screen Shot 2023-08-06 at 3 29 06 AM" src="https://github.com/user-attachments/assets/547dee80-c7dd-43b4-9cd9-bf88764f4d02">
 
 
 
