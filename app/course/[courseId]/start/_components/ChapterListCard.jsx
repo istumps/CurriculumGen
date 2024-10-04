@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { CiClock2 } from "react-icons/ci";
 
 function ChapterListCard({
@@ -6,20 +6,21 @@ function ChapterListCard({
     index
 }) {
   return (
-    <div className=' grid-cols-5 p-3 items-center border-b gap-2'>
+    <div className='flex items-start p-5 border-b gap-4'>
+      {/* Chapter Number */}
       <div>
-        <h2 className='p-1 bg-primary text-white rounded-full w-8 h-8 text-center'>{index+1}</h2>
+        <h2 className='p-1 bg-primary text-white rounded-full w-8 h-8 text-center justify-center'>{index + 1}</h2>
       </div>
 
-      <div className='cols-span-4'>
-        <h2 className='font-medium'>{chapter?.chapterName}</h2>
-        <h2 className='flex items-center gap-2 text-md text-primary'><CiClock2 />{chapter?.duration}</h2>
-
+      {/* Chapter Title and Duration */}
+      <div>
+        <h2 className='font-medium text-lg'>{chapter?.chapterName}</h2>
+        <h2 className='flex items-center gap-2 text-sm text-primary mt-1'>
+          <CiClock2 /> {chapter?.duration}
+        </h2>
       </div>
-      
-
     </div>
-  )
+  );
 }
 
-export default ChapterListCard
+export default ChapterListCard;

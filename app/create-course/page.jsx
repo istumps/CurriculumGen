@@ -84,8 +84,8 @@ const GenerateCourseLayout= async()=>{
     //console.log(FINAL_PROMPT)
 
     const result = await GenerateCourseLayout_AI.sendMessage(FINAL_PROMPT);
-    console.log(result.response?.text());
-    console.log(JSON.parse(result.response?.text()))
+    //console.log(result.response?.text());
+    //console.log(JSON.parse(result.response?.text()))
     setLoading(false)
     SaveCourseLayoutInDb(JSON.parse(result.response?.text()))
     
@@ -103,7 +103,8 @@ const SaveCourseLayoutInDb=async(courseLayout)=>{
         courseOutput:courseLayout,
         createdBy:user?.primaryEmailAddress?.emailAddress,
         userName:user?.fullName,
-        userProfileImage:user?.imageUrl
+        userProfileImage:user?.imageUrl,
+        includeVideo:userCourseInput?.displayVideo,
 
     })
     //console.log("FINISHED",result)

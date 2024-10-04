@@ -25,10 +25,10 @@ function SelectOption() {
         <div className='px-10 md:px-20 lg:px-24'>
             <div className='grid grid-cols-2 gap-10'>
                 <div>
-                    <label className='text-sm'>Difficulty Level</label>
+                    <label className='text-lg'>Difficulty Level</label>
                     <Select onValueChange={(value)=>handleInputChange('level', value)}
                     defaultValue={userCourseInput?.level}>
-                        <SelectTrigger className="">
+                        <SelectTrigger className="text-md">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -39,12 +39,12 @@ function SelectOption() {
                     </Select>
                 </div>
                 <div>
-                    <label className='text-sm'>Course Duration</label>
+                    <label className='text-lg'>Course Duration</label>
                     <Select onValueChange={(value)=>handleInputChange('duration', value)}
                     defaultValue={userCourseInput?.duration}
                     >
 
-                        <SelectTrigger className="">
+                        <SelectTrigger className="text-md">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -55,10 +55,10 @@ function SelectOption() {
                     </Select>
                 </div>
                 <div>
-                    <label className='text-sm'>Add Video</label>
+                    <label className='text-lg'>Add Video</label>
                     <Select onValueChange={(value)=>handleInputChange('displayVideo', value)}
                     defaultValue={userCourseInput?.displayVideo}>
-                        <SelectTrigger className="">
+                        <SelectTrigger className="text-md">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -68,8 +68,10 @@ function SelectOption() {
                     </Select>
                 </div>
                 <div>
-                    <label className='text-sm'>No of Chapter </label>
-                    <Input type="number" className=''
+                    <label className='text-lg'>No of Chapter </label>
+                    <Input type="number" className="text-md"
+                    min={0}  
+                    max={15}
                     onChange={(event)=>handleInputChange('noOfChapter', event.target.value)} 
                     defaultValue={userCourseInput?.noOfChapter}
                     />

@@ -15,9 +15,11 @@ function TopicDescription() {
   return (
     <div className='mx-20 mt-5 lg:mx-44'>
         {/* Topic */}
-        <div className='mt-10'>
+        <div className='mt-10 text-xl'>
             <label>Write the topic you want to generate a course (e.g Python Course, Yoga, etc.) </label>
             <Input placeholder={'Topic'}
+            className='h-12 text-xl'
+
             defaultValue={userCourseInput?.topic}
             onChange={(e)=>handleInputChange('topic', e.target.value)}
             />
@@ -30,7 +32,7 @@ function TopicDescription() {
             onChange={(e)=>handleInputChange('description', e.target.value)}
             />
         </div>
-        {/* Description */}
+   
 
     </div>
   )

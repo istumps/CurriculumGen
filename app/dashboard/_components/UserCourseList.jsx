@@ -16,7 +16,7 @@ function UserCourseList() {
     const result = await db.select()
     .from(CourseList)
     .where(eq(CourseList?.createdBy, user?.primaryEmailAddress?.emailAddress))
-    console.log(result)
+    //console.log(result)
     setCourseList(result)
     setUserCourseList(result)
   }
@@ -29,16 +29,20 @@ function UserCourseList() {
   return (
     <div>
       <h2 className='font-medium text-xl mt-10'>My AI Courses</h2>
-      <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 '>
+      <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3'>
       {courseList?.length>0?courseList.map((course, index) => (
         <CourseCard course={course} key={index} refreshData={()=>getUserCourse()}/>
       ))
       :
-        [1,2,3,4,5,6].map((item, index) => (
-          <div key={index} className='mt-5 w-full bg-slate-200 animate-pulse rounded-lg h-[250px]'>
-              </div>
-         
-        ))
+      <div className='text-center ju w-full mt-20 '>
+      <h2 className='text-2xl font-semibold text-gray-700 mb-4'>
+        You don't have any courses yet
+      </h2>
+      <p className='text-gray-400 mb-6'>
+        Click 'Create AI Course' to generate one!
+      </p>
+  
+    </div>
        
         }
     </div>

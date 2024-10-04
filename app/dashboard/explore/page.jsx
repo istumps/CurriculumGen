@@ -17,7 +17,7 @@ function Explore() {
     .limit(6)
     .offset(0)
     setCourseList(result)
-    console.log('This is result', result)
+    //console.log('This is result', result)
   }
 
   return (

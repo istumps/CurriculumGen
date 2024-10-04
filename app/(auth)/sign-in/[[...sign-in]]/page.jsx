@@ -34,8 +34,7 @@ export default function Page() {
         </h2>
 
         <p className="mt-4 leading-relaxed text-white/90">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-          quibusdam aperiam voluptatum.
+        Unlock personalized, AI-crafted courses tailored to your learning needs. Whether you're a beginner or advancing your expertise, our AI-driven platform curates content, adapts to your pace, and provides real-time feedback to ensure your success. Learn smarter, faster, and more efficiently with courses designed just for you.
         </p>
       </div>
     </section>

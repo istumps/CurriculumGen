@@ -46,7 +46,11 @@ function EditCourseBasicInfo({
 
   return (
     <div><Dialog>
-    <DialogTrigger><FaRegEdit /> </DialogTrigger>
+    <DialogTrigger>
+      <button className="flex items-center justify-center ml-3 text-black rounded">
+        <FaRegEdit />
+      </button> 
+      </DialogTrigger>
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Edit Course Title and Description</DialogTitle>

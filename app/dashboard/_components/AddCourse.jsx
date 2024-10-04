@@ -1,5 +1,5 @@
 'use client'
-import React, {useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import {useUser} from '@clerk/clerk-react'
 import {Button} from '@/components/ui/button'
 import Link from 'next/link'
@@ -9,7 +9,10 @@ function AddCourse() {
 
     const { user } = useUser()
     const {userCourseList, setUserCourseList} = useContext(UserCourseListContext)
+    const [hasBoards, setHasBoards] = useState(false)
 
+
+    
 
   return (
     <div className='flex items-center justify-between'> 
@@ -19,8 +22,18 @@ function AddCourse() {
         </h2>
         <p className='text-gray-500 text-sm'>Create new course with AI, Share with Friends, </p>
         </div>
-        <Link prefetch={true} href={userCourseList>=5?'dashboard/upgrade':'/create-course'}> <Button>+ Create AI course</Button></Link>
-       
+        
+        {userCourseList.length >= 5 ? (
+          <div className='flex flex-col'>
+            <h2 className='mt-4 text-red-500'>You have reached the course limit!</h2>
+            <Button disabled={true}>+ Create AI course</Button>
+          </div>
+        ) : (
+          <Link prefetch={true} href={'/create-course'}>
+            <Button>+ Create AI course</Button>
+          </Link>
+        )}
+              
        
 
         </div>

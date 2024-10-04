@@ -6,9 +6,10 @@ import { AiOutlineHome,  AiOutlineCompass, AiOutlineRocket, AiOutlineLogout } fr
 import { usePathname } from 'next/navigation';
 import {Progress} from '@/components/ui/progress'
 import {UserCourseListContext} from '@/app/_context/UserCourseListContext'
-
+import { useClerk } from '@clerk/clerk-react';
 function Sidebar() {
 
+  const { signOut } = useClerk(); // Clerk's signOut method
 
   const path = usePathname()
   const {userCourseList, setUserCourseList} = useContext(UserCourseListContext)
@@ -31,35 +32,59 @@ function Sidebar() {
       id:3,
       name: 'Upgrade ',
       icon: <AiOutlineRocket />, 
-      path: '/dashboard/upgrade'
+    path: '/dashboard/' // /dashboard/upgrade
 
     },
     {
       id:4,
-      name: 'Log Out ',
+      name: 'Log Out',
       icon: <AiOutlineLogout />, 
-      path: '/dashboard/upgrade'
+      path: '/sign-out'
 
     }
+   
   
 
   ]
+  const handleLogout = async () => {
+    try {
+      await signOut(); // Sign out the user using Clerk
+     // console.log('User has logged out');
+      // Optionally, redirect to homepage or any other path
+      window.location.href = '/'; // Redirect to homepage after logout
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
   return (
     <div className='fixed h-full md:w-64 p-5 shadow-md'>
-        <Image src='/logo.svg' width={50} height={50}/>
+        <Image src='/logo.svg' alt='logo' width={50} height={50}/>
         <hr className='py-5'/>
         <ul>
-          {Menu.map((item,index) => (
-            <Link href={item.path}>
-            <div className={`flex items-center gap-2 text-gray-600
-            p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3
-            ${item.path==path&&'bg-gray-100 text-black'}`}>
+      {Menu.map((item, index) => (
+        item.name === 'Log Out' ? (
+          <div
+            key={index}
+            className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3`}
+            onClick={handleLogout} // Call handleLogout on click
+          >
+            <div className='text-2xl'>{item.icon}</div>
+            <h2>{item.name}</h2>
+          </div>
+        ) : (
+          <Link href={item.path} key={index}>
+            <div
+              className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3
+              ${item.path === path ? 'bg-gray-100 text-black' : ''}`}
+            >
               <div className='text-2xl'>{item.icon}</div>
               <h2>{item.name}</h2>
+            </div>
+          </Link>
+        )
+      ))}
+    </ul>
 
-            </div></Link>
-          ))}
-        </ul>
         <div className='absolute bottom-10 w-[80%]'>
           <Progress className='mt-5' value={(userCourseList?.length/5) *100} />
           <h2 className='text-sm my-2'>{userCourseList?.length} out of 5 Course created</h2>

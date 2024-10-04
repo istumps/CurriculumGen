@@ -30,15 +30,15 @@ function DropdownOption({ children, handleOnDelete }) {
             <DropdownMenu>
                 <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => setOpenAlert(true)}>
-                        <div className='flex items-center gap-3'>
+                    <DropdownMenuItem onClick={onDeleteClick}>
+                        <div className='flex items-center gap-3 text-red-500'>
                             <FaRegTrashCan /> Delete
                         </div>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            {openAlert && (
+            {/*
                 <AlertDialog open={openAlert} onOpenChange={setOpenAlert}>
                     <AlertDialogContent>
                         <AlertDialogHeader>
@@ -56,8 +56,8 @@ function DropdownOption({ children, handleOnDelete }) {
                             </AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
-                </AlertDialog>
-            )}
+                </AlertDialog> */}
+        
         </div>
     );
 }

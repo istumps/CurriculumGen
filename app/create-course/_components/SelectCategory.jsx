@@ -24,7 +24,7 @@ function SelectCategory() {
             onClick={()=>handleCategoryChange(item.name)} 
             >
                 
-                    <Image src={item.icon} width={75} height={50}/>
+                    <Image src={item.icon} alt='icon' width={75} height={50}/>
                     <h2>{item.name}</h2>
                 </div>
                 ))}

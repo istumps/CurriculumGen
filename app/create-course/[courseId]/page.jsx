@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState,useContext } from 'react'
 
 import { db } from '@/configs/db'
 import { CourseList } from '@/configs/schema'
@@ -17,11 +17,12 @@ import ChapterList from './_components/ChapterList'
 import LoadingDialog from './_components/LoadingDialog'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-
-
+import { toast } from 'sonner'
+import { UserInputContext } from '@/app/_context/UserInputContext'
 
 
 function CourseLayout({params}) {
+  const {userCourseInput, setUserCourseInput}=useContext(UserInputContext)
 
     const {user} = useUser()
     const [course, setCourse]=useState([])
@@ -45,56 +46,72 @@ function CourseLayout({params}) {
         //console.log(result)
     }
 
-    const GenerateChapterContent= ()=>{
-        setLoading(true)
-        const chapters = course?.courseOutput?.chapters
-        chapters.forEach(async(chapter,index)=>{
-            const prompt= 'Explain the concept in Detail on Topic: '+course?.name+ ', Chapter: '+chapter?.chapterName+ ' ,in JSON format with list of array fields as title explanation on given chapter in detail and example if Code example (code field in <precode> format) when applicable'
+    const GenerateChapterContent = async () => {
+  setLoading(true);
+  const chapters = course?.courseOutput?.chapters;
 
-            console.log({prompt})
-           // if (index<3){
-                try {
-                    //Generate Video 
-                    let videoId= ''
-                     
-                     service.getVideos(course?.name+':'+chapter?.chapterName).then((resp)=>{
+  try {
+    // Process chapters sequentially using a for...of loop
+    for (const [index, chapter] of chapters.entries()) {
+      const prompt =
+        'Explain the concept in Detail on Topic: ' +
+        course?.name +
+        ', Chapter: ' +
+        chapter?.chapterName +
+        ' ,in JSON format with list of array fields as title explanation on given chapter in detail and example if Code example (code field in <precode> format) when applicable';
 
-                        console.log(resp)
-                        videoId=resp[0]?.id?.videoId
-                    }) 
-                    //Generate ChapterContent
-                    const result = await GenerateChapterContent_AI.sendMessage(prompt)
-                    console.log(result.response?.text())
-                    const content =JSON.parse(result.response?.text())
-                   
+      //console.log({ prompt });
+      let videoId = '';
+      if (userCourseInput?.displayVideo == "Yes") {
+      // Generate Video
+  
 
-                  
+      // Await video response
+      const videoResp = await service.getVideos(course?.name + ':' + chapter?.chapterName);
+      //console.log(videoResp);
+      videoId = videoResp[0]?.id?.videoId || '';
+      }
+      else{
+        
 
-                    //Save chaptercontent + video URL 
-                   await db.insert(Chapters).values({
-                        courseId: course?.courseId,
-                        chapterId: index,
-                        content: content,
-                        videoId: videoId
-                    })
+       // console.log('No video to generate');
+      }
 
-                    setLoading(false)
-                }
-                catch(e){
-                    setLoading(false)
-                    console.log("Error", e)
-            }
-            await db.update(CourseList).set({
-                publish:true
-            }).where(eq(CourseList.id, course?.id))
-            router.replace('/create-course/'+course?.courseId+'/finish')
-       // }
-            
-            } )
+      // Generate Chapter Content from AI
+      const result = await GenerateChapterContent_AI.sendMessage(prompt);
+      const textResponse = await result.response?.text(); // Await text response
+      const content = JSON.parse(textResponse);
+      //console.log(content);
+
+      // Save chapter content + video URL to the database
+      const NewContent = await db.insert(Chapters).values({
+        courseId: course?.courseId,
+        chapterId: index,
+        content: content,
+        videoId: videoId,
+        publish: true,
+      });
+
+      if (!NewContent) {
+        throw new Error('Failed to save chapter content');
+      }
     }
+
+    // After all chapters are processed, navigate to finish page
+    router.replace(`/create-course/${course?.courseId}/finish`);
+  } catch (e) {
+    setLoading(false);
+   // console.error('Error:', e);
+    
+    toast.error('Failed to generate course content, please try again!');
+  } finally {
+    setLoading(false);
+  }
+};
+
   return (
-    <div className='mt-10 md:px-20 lg:px-44' >
-        <h2 className='font-bold text-center text-2xl'>Course Layout</h2>
+    <div className='mt-10 md:px-20 lg:px-44 ' >
+        <h2 className='font-bold text-center text-2xl'>Preview Course Layout</h2>
         
         <LoadingDialog loading={loading} />
         {/* BasicInfo */}
@@ -105,8 +122,13 @@ function CourseLayout({params}) {
 
         {/* ListofLessons */}
         <ChapterList course={course} refreshData={()=>GetCourse()}/>
-
-        <Button onClick={GenerateChapterContent} className='my-10'>Generate Course Content</Button>
+        
+        <div className='w-full flex justify-end'>
+            <Button onClick={GenerateChapterContent} className='my-10'>
+                Generate Course Content
+            </Button>
+        </div>
+        
     </div>
   )
 }

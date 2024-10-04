@@ -44,7 +44,7 @@ function EditChapters({
     .returning({id:CourseList.id});
 
     refreshData(true)
-    console.log(result)
+    //console.log(result)
     
 
     
