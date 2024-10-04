@@ -28,7 +28,7 @@ To start creating your own AI-generated courses on **Instructify**, follow these
 - **Progress Tracking**: Monitor your learning and development over time.
 - **Video Integration**: Optionally include auto-generated video content in your course
 
-<img width="400" alt="Screen Shot 2023-08-06 at 3 29 06 AM" src="https://github.com/user-attachments/assets/547dee80-c7dd-43b4-9cd9-bf88764f4d02">
+<img width="400" alt="Screen Shot 2023-08-06 at 3 29 06 AM" src="https://github.com/user-attachments/assets/6621f1e9-f1bc-4550-ace2-697e9ac2d011">
 
 
 
