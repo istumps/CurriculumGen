@@ -36,7 +36,7 @@ To start creating your own AI-generated courses on **Instructify**, follow these
 
 ### Frontend
 
-- **Next.js**: A powerful React framework used for server-side rendering and static site generation.
+- **Next.js**: Used for server-side rendering and static site generation.
 - **React**: For building dynamic and interactive user interfaces.
 - **JavaScript**: Core language for building interactive elements on the platform.
 - **shadcnUI & TailwindCSS**: Provides customizable and responsive UI/UX design.
@@ -45,6 +45,7 @@ To start creating your own AI-generated courses on **Instructify**, follow these
 
 - **Drizzle ORM**: A TypeScript-first ORM for PostgreSQL, ensuring smooth database operations.
 - **PostgreSQL**: A powerful, open-source relational database for storing course data and user information.
+- **Firebase**: A scalable, real-time NoSQL database that allows for efficient storage and retrieval of image data
 
 ### Authentication & User Management
 
