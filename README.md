@@ -1,6 +1,6 @@
-# Instructify - AI Course Generation Platform
+# CurriculumGen - AI Course Generation Platform
 
-**Instructify** is an innovative platform that enables users to create personalized courses on any subject using the power of AI. With **Next.js**, **React**, **Drizzle ORM**, and **Clerk** for user authentication, coupled with **PostgreSQL** as the primary database, Instructify delivers a seamless experience for generating detailed, structured courses that cater to individual learning needs.
+**CurriculumGen** is an innovative platform that enables users to create personalized courses on any subject using the power of AI. With **Next.js**, **React**, **Drizzle ORM**, and **Clerk** for user authentication, coupled with **PostgreSQL** as the primary database, Instructify delivers a seamless experience for generating detailed, structured courses that cater to individual learning needs.
 
 ## Screenshots
 
