@@ -6,7 +6,7 @@ function Hero() {
   <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex  lg:items-center">
     <div className="mx-auto max-w-xl text-center">
       <h1 className="text-3xl text-primary font-extrabold sm:text-5xl">
-      Instructify
+      CurriculumGen
               <strong className="font-extrabold text-black sm:block"> Custom Learning Paths Powered by AI </strong>
       </h1>
 
