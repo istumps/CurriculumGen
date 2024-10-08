@@ -14,7 +14,7 @@
 
 To start creating your own AI-generated courses on **Instructify**, follow these simple steps:
 
-1. Visit the [Instructify Website](https://instructify-ai.vercel.app/).
+1. Visit the [CurriculumGen Website](https://curriculumgen.vercel.app/).
 2. Sign up or log in using your preferred authentication method (email, Google, etc.).
 3. Choose a topic and let the AI generate a fully detailed course with chapters, content, and examples.
 4. Customize the content as needed and publish your course.
